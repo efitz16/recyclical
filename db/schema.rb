@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(version: 20160924182741) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "locations_material_types", force: :cascade do |t|
+    t.integer "material_type_id"
+    t.integer "location_id"
+    t.index ["location_id"], name: "index_locations_material_types_on_location_id", using: :btree
+    t.index ["material_type_id"], name: "index_locations_material_types_on_material_type_id", using: :btree
+  end
+
   create_table "material_types", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "material_types_locations", force: :cascade do |t|
-    t.integer "material_type_id"
-    t.integer "location_id"
-    t.index ["location_id"], name: "index_material_types_locations_on_location_id", using: :btree
-    t.index ["material_type_id"], name: "index_material_types_locations_on_material_type_id", using: :btree
   end
 
 end

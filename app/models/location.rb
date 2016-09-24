@@ -1,9 +1,19 @@
 class Location < ApplicationRecord
   has_and_belongs_to_many :material_types
-  after_validation :reverse_geocode unless :address
+
   validates :longitude, presence: true
   validates :latitude, presence: true
 
+  attr_accessor :raw_address
+
+  after_validation -> {
+    self.address = self.raw_address
+    geocode
+  }, if: ->(obj){ obj.raw_address.present? and obj.raw_address != obj.address }
+  after_validation :reverse_geocode, unless: ->(obj) { obj.raw_address.present? },
+                   if: ->(obj){ obj.latitude.present? and obj.latitude_changed? and obj.longitude.present? and obj.longitude_changed? }
+
+  geocoded_by :raw_address
   reverse_geocoded_by :latitude, :longitude
 
 end
