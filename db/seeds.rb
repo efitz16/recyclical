@@ -17,6 +17,7 @@ materials.each do |m|
 end
 
 results.each do |result|
-  location = Location.new(longitude: result["location_1"]["coordinates"][0], latitude: result["location_1"]["coordinates"][0])
-  location.material_type << MaterialType.where(name: "food")
+  location = Location.new(longitude: result["location_1"]["coordinates"][0], latitude: result["location_1"]["coordinates"][1])
+  location.material_types << MaterialType.where(name: "food")
+  location.save
 end
