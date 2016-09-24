@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => ENV['DISPOSAL_NETWORKS']})
+
+results = client.get("9m2c-n6wx", :$limit => 5000)
+
+materials = ["food", "textiles", "clothing", "electronics"]
+
+materials.each do |m|
+  MaterialType.create(name: m)
+end
+
+results.each do |result|
+  location = Location.new(longitude: result["location_1"]["coordinates"][0], latitude: result["location_1"]["coordinates"][1])
+  location.material_types << MaterialType.where(name: "food")
+  location.save
+end
