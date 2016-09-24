@@ -1,0 +1,2 @@
+module FoodScrapsHelper
+end
