@@ -49,5 +49,15 @@ electronics_places.each do |place|
 	place.save
 end
 
+# clothing drop-off sites:
 
+clothing_drop_off_sites = []
+clothing_drop_off_sites << Location.create(latitude: 40.733170, longitude: -73.998611)
+clothing_drop_off_sites << Location.create(latitude: 40.736716, longitude: -73.994048)
+clothing_drop_off_sites << Location.create(latitude: 40.738527, longitude: -73.982296)
+clothing_drop_off_sites << Location.create(latitude: 40.744701, longitude: -73.992195)
+clothing_drop_off_sites << Location.create(latitude: 40.688973, longitude: -73.984192)
+
+clothing_drop_off_sites.each do |s|
+	s.material_types << MaterialType.find_by(name: "clothing")
 end
