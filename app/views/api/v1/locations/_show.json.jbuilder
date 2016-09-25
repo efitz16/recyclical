@@ -1,7 +1,8 @@
 location ||= @location
 
 json.id location.id
-json.address location.address
+json.address1 location.address.split(', ')[0]
+json.address2 location.address.split(', ')[1..2].join(', ')
 json.coordinates do
   json.latitude location.latitude
   json.longitude location.longitude
