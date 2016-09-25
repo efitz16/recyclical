@@ -1,13 +1,18 @@
 class FoodScrapsController < ApplicationController
-	def new
+	def index
+		if params['coordinates']
+			@locations = Location.joins(:material_types).where(material_types: { name: "food" }).near(params['coordinates'], 5)
+		elsif params['zipcode']
+			@locations = Location.joins(:material_types).where(material_types: { name: "food" }).near(params['zipcode'], 5)
+		end
 
+		if @locations[0].present?
+			render '/locations/index'
+		else
+			render json: { message: "Resource not found" }, status: 404
+		end
 	end
 
 	def create
-		client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => ENV['DISPOSAL_NETWORKS']})
-
-		results = client.get("9m2c-n6wx", :$limit => 5000)
-
-		params['zip']
 	end
 end
