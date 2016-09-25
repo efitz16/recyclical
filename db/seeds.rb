@@ -29,7 +29,7 @@ manhattan_location = Location.new(latitude: 40.802286, longitude: -73.872615)
 electronics_places << manhattan_location
 
 bronx_location = electronics_results.find { |r| r["borough"] == "Bronx" }
-bronx_location_location = Location.new(latitude: 40.802335, longitude: -73.872593)
+bronx_location = Location.new(latitude: 40.802335, longitude: -73.872593)
 electronics_places << bronx_location
 
 queens_location = electronics_results.find { |r| r["borough"] == "Queens" }
@@ -37,7 +37,7 @@ queens_location = Location.new(latitude: 40.770826, longitude: -73.847093)
 electronics_places << queens_location
 
 brooklyn_location = electronics_results.find { |r| r["borough"] == "Brooklyn" }
-brooklyn_location_location = Location.new(latitude: 40.590733, longitude: -73.996487)
+brooklyn_location = Location.new(latitude: 40.590733, longitude: -73.996487)
 electronics_places << brooklyn_location
 
 staten_island_location = electronics_results.find { |r| r["borough"] == "Staten Island" }
@@ -48,7 +48,6 @@ electronics_places.each do |place|
 	place.material_types << MaterialType.find_by(name: "electronics")
 	place.save
 end
-
 # clothing drop-off sites:
 
 clothing_drop_off_sites = []
